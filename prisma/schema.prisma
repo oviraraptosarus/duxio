@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  ANALYST
+}
+
+enum LeadStatus {
+  NEW
+  QUALIFIED
+  BOOKED
+  WON
+  LOST
+  DISQUALIFIED
+}
+
+enum BookingStatus {
+  REQUESTED
+  SCHEDULED
+  COMPLETED
+  NO_SHOW
+  CANCELLED
+}
+
+enum AnalyticsEventType {
+  PAGE_VIEW
+  CTA_CLICK
+  SCORECARD_STARTED
+  SCORECARD_COMPLETED
+  LEAD_SUBMITTED
+  BOOKING_REQUESTED
+  CHAT_MESSAGE
+  ADMIN_ACTION
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String?
+  role         Role       @default(ADMIN)
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  auditLogs    AuditLog[]
+}
+
+model Contact {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  company       String?
+  phone         String?
+  source        String?
+  consent       Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  leads         Lead[]
+  conversations Conversation[]
+  bookings      Booking[]
+}
+
+model Lead {
+  id             String           @id @default(cuid())
+  contactId      String
+  contact        Contact          @relation(fields: [contactId], references: [id])
+  company        String?
+  leadSource     String
+  monthlyRevenue String?
+  problem        String
+  status         LeadStatus       @default(NEW)
+  score          Int              @default(0)
+  priority       String           @default("review")
+  attribution    Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  bookings       Booking[]
+  conversations  Conversation[]
+  scorecards     ScorecardResult[]
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  contactId String?
+  contact   Contact?  @relation(fields: [contactId], references: [id])
+  leadId    String?
+  lead      Lead?     @relation(fields: [leadId], references: [id])
+  channel   String
+  summary   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  role           String
+  body           String
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  leadId      String?
+  lead        Lead?         @relation(fields: [leadId], references: [id])
+  contactId   String?
+  contact     Contact?      @relation(fields: [contactId], references: [id])
+  status      BookingStatus @default(REQUESTED)
+  startsAt    DateTime?
+  timezone    String?
+  externalId  String?
+  externalUrl String?
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model AnalyticsEvent {
+  id          String             @id @default(cuid())
+  type        AnalyticsEventType
+  sessionId   String?
+  contactId   String?
+  path        String?
+  referrer    String?
+  properties  Json?
+  fingerprint String?
+  createdAt   DateTime           @default(now())
+
+  @@index([type, createdAt])
+  @@index([sessionId])
+}
+
+model UserAction {
+  id        String   @id @default(cuid())
+  sessionId String?
+  action    String
+  target    String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+}
+
+model ScorecardResult {
+  id        String   @id @default(cuid())
+  leadId    String?
+  lead      Lead?    @relation(fields: [leadId], references: [id])
+  score     Int
+  result    String
+  answers   Json
+  source    String?
+  createdAt DateTime @default(now())
+
+  @@index([score, createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([action, createdAt])
+}
+
+model IntegrationSync {
+  id          String   @id @default(cuid())
+  provider    String
+  direction   String
+  status      String
+  payload     Json?
+  response    Json?
+  error       String?
+  attemptedAt DateTime @default(now())
+
+  @@index([provider, attemptedAt])
+}
