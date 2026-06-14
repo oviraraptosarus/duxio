@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -99,9 +100,19 @@ export function ScorecardClient() {
                   Leak Severity
                 </div>
 
-                <h3 className="serif mt-2 text-2xl md:text-4xl tracking-[-0.04em] text-[var(--ink)]">
+                <div
+                  className={cn(
+                    "mt-3 inline-flex rounded-full px-4 py-2 text-sm font-medium",
+                    result.severity === "Critical" &&
+                      "bg-red-500/10 text-red-300 border border-red-500/20",
+                    result.severity === "Moderate" &&
+                      "bg-yellow-500/10 text-yellow-300 border border-yellow-500/20",
+                    result.severity === "Low" &&
+                      "bg-green-500/10 text-green-300 border border-green-500/20"
+                  )}
+                >
                   {result.severity}
-                </h3>
+                </div>
               </div>
 
               <div className="grid gap-3 md:grid-cols-2">
@@ -128,7 +139,7 @@ export function ScorecardClient() {
 
               <div className="rounded-2xl border border-[rgba(244,209,155,0.18)] bg-[rgba(244,209,155,0.05)] p-4">
                 <div className="mono text-[0.62rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
-                  Recommended First System
+                  Highest-Leverage Fix
                 </div>
 
                 <div className="mt-2 font-medium text-[var(--ink)]">
@@ -144,7 +155,7 @@ export function ScorecardClient() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="w-full sm:w-auto">
                 <a href="#book">
-                  Book My Diagnosis
+                  Get My Revenue Audit
                   <ArrowRight size={16} />
                 </a>
               </Button>
