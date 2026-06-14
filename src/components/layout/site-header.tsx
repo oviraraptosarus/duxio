@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Menu, X } from "lucide-react";
@@ -9,7 +9,10 @@ import { navItems } from "@/lib/content";
 
 function DuxioMark() {
   return (
-    <Link href="/" className="focus-visible-ring group flex items-center gap-3 rounded-full">
+    <Link
+      href="/"
+      className="focus-visible-ring group flex items-center gap-3 rounded-full"
+    >
       <Image
         src="/duxio-symbol.png"
         alt=""
@@ -18,6 +21,7 @@ function DuxioMark() {
         className="h-10 w-auto object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.45)] transition duration-300 group-hover:scale-[1.04]"
         priority
       />
+
       <span className="flex flex-col gap-1">
         <Image
           src="/duxio-wordmark.png"
@@ -27,6 +31,7 @@ function DuxioMark() {
           className="h-[1.05rem] w-auto object-contain opacity-95 brightness-110 contrast-110"
           priority
         />
+
         <span className="mono hidden text-[0.55rem] uppercase tracking-[0.22em] text-[var(--ink-subtle)] sm:block">
           Revenue systems
         </span>
@@ -37,6 +42,18 @@ function DuxioMark() {
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#07080a]/86 shadow-[0_18px_70px_rgba(0,0,0,0.32)] backdrop-blur-xl">
@@ -56,7 +73,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="secondary" className="hidden sm:inline-flex">
+          <Button
+            asChild
+            size="sm"
+            variant="secondary"
+            className="hidden sm:inline-flex"
+          >
             <a href="#book">
               Book diagnosis
               <ArrowUpRight size={15} />
@@ -74,27 +96,37 @@ export function SiteHeader() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-[var(--line)] bg-[#07080a]/98 backdrop-blur-xl md:hidden">
-          <nav className="container-shell flex flex-col gap-2 py-4">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className="rounded-xl px-4 py-3 text-[var(--ink)] transition hover:bg-white/[0.05]"
-              >
-                {item.label}
-              </a>
-            ))}
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
 
-            <Button asChild className="mt-2">
-              <a href="#book" onClick={() => setMobileOpen(false)}>
-                Book diagnosis
-                <ArrowUpRight size={15} />
-              </a>
-            </Button>
-          </nav>
-        </div>
+          <div className="absolute left-0 right-0 top-full z-50 border-t border-[var(--line)] bg-[#07080a]/98 backdrop-blur-xl md:hidden">
+            <nav className="container-shell flex flex-col gap-2 py-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-xl px-4 py-3 text-[var(--ink)] transition hover:bg-white/[0.05]"
+                >
+                  {item.label}
+                </a>
+              ))}
+
+              <Button asChild className="mt-2">
+                <a
+                  href="#scorecard"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Find My Biggest Leak
+                  <ArrowUpRight size={15} />
+                </a>
+              </Button>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
