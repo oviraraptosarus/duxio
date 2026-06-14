@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -13,9 +12,8 @@ function getResult(score: number) {
   if (score <= 3) {
     return {
       severity: "Critical",
-      title: "Revenue leakage detected",
       issue: "Lead response and follow-up",
-      impact: "High",
+      impact: "Immediate Attention",
       recommendation: "Lead Capture & Response Automation",
       detail:
         "Your business is likely relying on manual follow-up, inconsistent response times, and disconnected communication. Leads are entering the business but some are not making it to booked conversations.",
@@ -25,7 +23,6 @@ function getResult(score: number) {
   if (score <= 7) {
     return {
       severity: "Moderate",
-      title: "Demand exists but handoffs are weak",
       issue: "Pipeline orchestration",
       impact: "Medium",
       recommendation: "Pipeline & Workflow Automation",
@@ -36,7 +33,6 @@ function getResult(score: number) {
 
   return {
     severity: "Low",
-    title: "Strong operating foundation",
     issue: "Optimization opportunity",
     impact: "Low",
     recommendation: "Telemetry & Reactivation Systems",
@@ -71,7 +67,7 @@ export function ScorecardClient() {
       body: JSON.stringify({
         score: total,
         answers,
-        result: result.title,
+        result: result.severity,
         source: "site_scorecard",
       }),
     }).catch(() => undefined);
@@ -81,7 +77,14 @@ export function ScorecardClient() {
     return (
       <div className="panel rounded-[2rem] p-6 md:p-8">
         <div className="grid gap-6 md:gap-8 md:grid-cols-[220px_1fr] md:items-center">
-          <div className="grid aspect-square place-items-center rounded-full border border-[var(--line-strong)] bg-white/[0.035]">
+          <div
+            className={cn(
+              "grid aspect-square place-items-center rounded-full bg-white/[0.035]",
+              result.severity === "Critical" && "border border-red-500/20",
+              result.severity === "Moderate" && "border border-yellow-500/20",
+              result.severity === "Low" && "border border-green-500/20"
+            )}
+          >
             <div className="text-center">
               <div className="serif text-4xl md:text-5xl leading-none tracking-[-0.06em] text-[var(--ink)]">
                 {total}
@@ -155,7 +158,9 @@ export function ScorecardClient() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="w-full sm:w-auto">
                 <a href="#book">
-                  Get My Revenue Audit
+                  {result.severity === "Low"
+                    ? "Explore Optimization Opportunities"
+                    : "Get My Revenue Audit"}
                   <ArrowRight size={16} />
                 </a>
               </Button>
