@@ -71,8 +71,8 @@ export function SignalScanner({ className }: SignalScannerProps) {
           </div>
         </div>
 
-        <div className="relative mt-4 grid grid-cols-8 grid-rows-3 gap-2">
-          {Array.from({ length: 24 }).map((_, index) => (
+        <div className="relative mt-4 grid grid-cols-8 grid-rows-6 gap-2">
+          {Array.from({ length: 48 }).map((_, index) => (
             <div
               key={index}
               className="relative min-h-8 rounded-2xl border border-white/[0.045] bg-white/[0.025] opacity-30"
@@ -87,7 +87,7 @@ export function SignalScanner({ className }: SignalScannerProps) {
           ))}
         </div>
 
-        <div className="relative z-10 mt-6 md:mt-8 grid gap-3 md:grid-cols-3">
+        <div className="relative z-10 mt-4 md:mt-6 grid gap-3 md:grid-cols-3">
           {[
             ["01", "Capture", "DM, form, call"],
             ["02", "Qualify", "Fit + urgency"],
