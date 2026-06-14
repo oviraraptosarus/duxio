@@ -7,11 +7,41 @@ export function TrustSection() {
     <section id="trust" className="py-24">
       <div className="container-shell">
         <SectionHeading
-          eyebrow="Control"
-          title="Automation should make the business calmer, not harder to trust."
-          copy="Every Duxio system is designed with ownership, fallback states, human override, and measurement. The goal is not to add more tools. The goal is to make the revenue path easier to see and harder to break."
+          eyebrow="Trust"
+          title="Built around systems, not guesswork."
+          copy="Every recommendation starts with a measurable leak, bottleneck, or breakdown in the revenue path. The goal is not more tools. The goal is fewer leaks and more booked revenue."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        
+        <div className="mt-12 grid gap-4 rounded-[2rem] border border-[var(--line)] bg-white/[0.03] p-6 md:grid-cols-3">
+          <div>
+            <div className="mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+              Approach
+            </div>
+            <div className="mt-2 font-medium text-[var(--ink)]">
+              Diagnosis before implementation
+            </div>
+          </div>
+
+          <div>
+            <div className="mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+              Focus
+            </div>
+            <div className="mt-2 font-medium text-[var(--ink)]">
+              Revenue infrastructure, not random automation
+            </div>
+          </div>
+
+          <div>
+            <div className="mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+              Goal
+            </div>
+            <div className="mt-2 font-medium text-[var(--ink)]">
+              More qualified conversations. More booked revenue.
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {trustSystems.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.05}>
               <div className="group relative overflow-hidden rounded-[2rem] border border-[var(--line)] bg-white/[0.03] p-6 transition duration-300 hover:-translate-y-1 hover:border-[rgba(244,209,155,0.28)] hover:bg-white/[0.045]">
