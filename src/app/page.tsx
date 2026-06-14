@@ -23,6 +23,10 @@ export default function Home() {
         <LeaksSection />
         <SystemSection />
         <MethodSection />
+        
+        {/* Procedural Proof Node */}
+        <ExampleAuditSection />
+        
         <ServicesSection />
         <ProofSection />
         <ScorecardSection />
