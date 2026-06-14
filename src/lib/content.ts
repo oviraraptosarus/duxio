@@ -18,6 +18,7 @@ export const navItems = [
   { label: "Leaks", href: "#leaks" },
   { label: "System", href: "#system" },
   { label: "Services", href: "#services" },
+  { label: "Audit", href: "#audit" },
   { label: "Scorecard", href: "#scorecard" },
   { label: "Book", href: "#book" },
 ];
