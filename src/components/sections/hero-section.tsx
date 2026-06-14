@@ -51,27 +51,29 @@ export function HeroSection() {
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[var(--ink-subtle)]">
-              {["15-minute diagnosis", "One-week pilot", "Measured outcomes"].map(
-                (item) => (
-                  <span key={item} className="inline-flex items-center gap-2">
-                    <CheckCircle2
-                      size={15}
-                      className="text-[var(--success)]"
-                    />
-                    {item}
-                  </span>
-                )
-              )}
+              {[
+                "15-minute diagnosis",
+                "One-week pilot",
+                "Measured outcomes",
+              ].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2">
+                  <CheckCircle2
+                    size={15}
+                    className="text-[var(--success)]"
+                  />
+                  {item}
+                </span>
+              ))}
             </div>
           </Reveal>
         </div>
 
         <Reveal delay={0.18}>
-          <SignalScanner className="premium-ring lg:translate-y-4" />
+          <SignalScanner className="premium-ring" />
         </Reveal>
       </div>
 
-      <div className="container-shell mt-8 grid gap-3 md:mt-10 md:grid-cols-3">
+      <div className="container-shell mt-10 md:mt-14 grid gap-3 md:grid-cols-3">
         {heroMetrics.map((metric, index) => (
           <Reveal key={metric.label} delay={0.08 * index}>
             <Metric {...metric} />
