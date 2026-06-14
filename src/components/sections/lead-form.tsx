@@ -49,7 +49,7 @@ export function LeadForm() {
 
     form.reset();
     setState("success");
-    setMessage("Your details are in. Choose a time now so the diagnosis is locked into the calendar.");
+    setMessage("You're one step away. Choose a time below and we'll identify the highest-impact bottleneck in your revenue path.");
   }
 
   if (state === "success") {
@@ -60,7 +60,7 @@ export function LeadForm() {
         <p className="mt-4 text-sm leading-7 text-[var(--ink-muted)]">{message}</p>
         <Button asChild className="mt-7">
           <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
-            Open Calendly
+            Book My Diagnosis
             <ArrowRight size={16} />
           </a>
         </Button>
@@ -81,26 +81,11 @@ export function LeadForm() {
         </div>
         <div>
           <Label htmlFor="phone">Phone number</Label>
-          <Input id="phone" name="phone" type="tel" required placeholder="+1 555 000 0000" autoComplete="tel" />
+          <Input id="phone" name="phone" type="tel" placeholder="+1 555 000 0000" autoComplete="tel" />
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            <Label htmlFor="company">Company</Label>
-            <Input id="company" name="company" required placeholder="Business name" autoComplete="organization" />
-          </div>
-          <div>
-            <Label htmlFor="monthlyRevenue">Monthly revenue</Label>
-            <Select id="monthlyRevenue" name="monthlyRevenue" defaultValue="">
-              <option value="" disabled>
-                Select range
-              </option>
-              <option value="pre-revenue">Pre-revenue</option>
-              <option value="under-10k">Under $10k</option>
-              <option value="10k-50k">$10k - $50k</option>
-              <option value="50k-250k">$50k - $250k</option>
-              <option value="250k-plus">$250k+</option>
-            </Select>
-          </div>
+        <div>
+          <Label htmlFor="company">Company</Label>
+          <Input id="company" name="company" required placeholder="Business name" autoComplete="organization" />
         </div>
         <div>
           <Label htmlFor="leadSource">Where demand enters now</Label>
@@ -129,11 +114,11 @@ export function LeadForm() {
       {state === "error" ? <p className="mt-5 text-sm text-[var(--danger)]">{message}</p> : null}
       <Button type="submit" disabled={state === "submitting"} size="lg" className="mt-7 w-full">
         {state === "submitting" ? <Loader2 size={16} className="animate-spin" /> : null}
-        Request diagnosis
+        Get My Revenue Diagnosis
         <ArrowRight size={16} />
       </Button>
       <p className="mt-4 text-center text-xs leading-5 text-[var(--ink-subtle)]">
-        The intake is stored as a lead, scored, and routed for booking. No spam loop.
+        You'll receive scheduling details immediately after submission.
       </p>
     </form>
   );
