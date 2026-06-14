@@ -254,4 +254,9 @@ export const faqs = [
     answer:
       "Usually access to the tools involved, a short walkthrough of how leads currently arrive, and quick feedback when the first version is live. We keep the lift on your side low.",
   },
+  {
+    question: "Do I need to replace my existing tools?",
+    answer:
+      "Usually not. Most systems are built around the tools you already use, reducing disruption and implementation time.",
+  },
 ];
