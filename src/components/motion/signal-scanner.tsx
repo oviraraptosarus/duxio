@@ -71,20 +71,22 @@ export function SignalScanner({ className }: SignalScannerProps) {
           </div>
         </div>
 
-        <div className="relative mt-4 grid grid-cols-8 grid-rows-6 gap-2">
-          {Array.from({ length: 48 }).map((_, index) => (
-            <div
-              key={index}
-              className="relative min-h-8 rounded-2xl border border-white/[0.045] bg-white/[0.025] opacity-30"
-            >
-              <span
-                className={cn(
-                  "absolute left-1/2 top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--signal)] opacity-40",
-                  index % 7 === 0 && "scanner-dot"
-                )}
-              />
-            </div>
-          ))}
+        <div className="relative mt-4 h-[15rem] overflow-hidden">
+          <div className="relative grid grid-cols-8 grid-rows-3 gap-2">
+            {Array.from({ length: 24 }).map((_, index) => (
+              <div
+                key={index}
+                className="relative min-h-8 rounded-2xl border border-white/[0.045] bg-white/[0.025] opacity-30"
+              >
+                <span
+                  className={cn(
+                    "absolute left-1/2 top-1/2 size-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--signal)] opacity-40",
+                    index % 7 === 0 && "scanner-dot"
+                  )}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="relative z-10 mt-4 md:mt-6 grid gap-3 md:grid-cols-3">
@@ -137,7 +139,7 @@ export function SignalScanner({ className }: SignalScannerProps) {
         </div>
       </div>
 
-      <div className="scanner-beam absolute -left-1/3 top-0 h-full w-1/3 rotate-6 bg-gradient-to-r from-transparent via-[rgba(244,209,155,0.12)] to-transparent" />
+      <div className="scanner-beam absolute -left-1/3 top-0 h-[15rem] w-1/3 rotate-6 bg-gradient-to-r from-transparent via-[rgba(244,209,155,0.12)] to-transparent" />
     </div>
   );
 }
