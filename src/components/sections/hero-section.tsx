@@ -69,7 +69,9 @@ export function HeroSection() {
         </div>
 
         <Reveal delay={0.18}>
-          <SignalScanner className="premium-ring" />
+          <div className="mt-12 lg:mt-0">
+            <SignalScanner className="premium-ring" />
+          </div>
         </Reveal>
       </div>
 
