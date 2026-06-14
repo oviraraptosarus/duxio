@@ -8,10 +8,12 @@ import { cn } from "@/lib/cn";
 
 type Answers = Record<string, number>;
 
+// The underlying cosmic rules governing the score's manifestation
 function getResult(score: number) {
   if (score <= 3) {
     return {
       severity: "Critical",
+      priority: "★★★★★",
       issue: "Lead response and follow-up",
       impact: "Immediate Attention",
       recommendation: "Lead Capture & Response Automation",
@@ -23,8 +25,9 @@ function getResult(score: number) {
   if (score <= 7) {
     return {
       severity: "Moderate",
+      priority: "★★★★☆",
       issue: "Pipeline orchestration",
-      impact: "Medium",
+      impact: "Meaningful Revenue Loss",
       recommendation: "Pipeline & Workflow Automation",
       detail:
         "You already have demand entering the business, but the systems between lead capture, qualification, and booking are creating friction and unnecessary drop-off.",
@@ -33,8 +36,9 @@ function getResult(score: number) {
 
   return {
     severity: "Low",
+    priority: "★★☆☆☆",
     issue: "Optimization opportunity",
-    impact: "Low",
+    impact: "Optimization Opportunity",
     recommendation: "Telemetry & Reactivation Systems",
     detail:
       "Core systems appear healthy. The highest leverage opportunity is deeper attribution, reactivation loops, reporting, and operational optimization.",
@@ -103,18 +107,29 @@ export function ScorecardClient() {
                   Leak Severity
                 </div>
 
-                <div
-                  className={cn(
-                    "mt-3 inline-flex rounded-full px-4 py-2 text-sm font-medium",
-                    result.severity === "Critical" &&
-                      "bg-red-500/10 text-red-300 border border-red-500/20",
-                    result.severity === "Moderate" &&
-                      "bg-yellow-500/10 text-yellow-300 border border-yellow-500/20",
-                    result.severity === "Low" &&
-                      "bg-green-500/10 text-green-300 border border-green-500/20"
-                  )}
-                >
-                  {result.severity}
+                <div className="mt-3 flex items-center gap-4">
+                  <div
+                    className={cn(
+                      "inline-flex rounded-full px-4 py-2 text-sm font-medium",
+                      result.severity === "Critical" &&
+                        "bg-red-500/10 text-red-300 border border-red-500/20",
+                      result.severity === "Moderate" &&
+                        "bg-yellow-500/10 text-yellow-300 border border-yellow-500/20",
+                      result.severity === "Low" &&
+                        "bg-green-500/10 text-green-300 border border-green-500/20"
+                    )}
+                  >
+                    {result.severity}
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <span className="mono text-[0.62rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+                      Priority
+                    </span>
+                    <span className="text-[var(--signal)] tracking-[0.1em] text-sm">
+                      {result.priority}
+                    </span>
+                  </div>
                 </div>
               </div>
 
