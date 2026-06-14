@@ -8,6 +8,7 @@ import { ProofSection } from "@/components/sections/proof-section";
 import { ScorecardSection } from "@/components/sections/scorecard-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { SiteHeader } from "@/components/layout/site-header";
+import { MobileCTA } from "@/components/layout/mobile-cta";
 import { SystemSection } from "@/components/sections/system-section";
 import { TrustSection } from "@/components/sections/trust-section";
 
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader />
+
       <main>
         <HeroSection />
         <LeaksSection />
@@ -27,6 +29,9 @@ export default function Home() {
         <ConversionSection />
         <FaqSection />
       </main>
+
+      <MobileCTA />
+
       <Footer />
     </>
   );
