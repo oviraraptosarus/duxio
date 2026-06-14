@@ -87,7 +87,7 @@ export function SignalScanner({ className }: SignalScannerProps) {
           ))}
         </div>
 
-        <div className="relative z-10 mt-6 md:mt-8 grid gap-3 md:grid-cols-3">
+        <div className="relative z-10 mt-2 md:mt-8 grid gap-3 md:grid-cols-3">
           {[
             ["01", "Capture", "DM, form, call"],
             ["02", "Qualify", "Fit + urgency"],
@@ -137,7 +137,7 @@ export function SignalScanner({ className }: SignalScannerProps) {
         </div>
       </div>
 
-      <div className="scanner-beam absolute -left-1/3 top-0 h-full w-1/3 rotate-6 bg-gradient-to-r from-transparent via-[rgba(244,209,155,0.12)] to-transparent" />
+      <div className="scanner-beam absolute -left-1/3 -top-24 h-[140%] w-1/3 rotate-6 bg-gradient-to-r from-transparent via-[rgba(244,209,155,0.12)] to-transparent" />
     </div>
   );
 }
