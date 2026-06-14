@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function ExampleAuditSection() {
   return (
-    <section id="example-audit" className="border-y border-[var(--line)] bg-black/20 py-24">
+    <section id="audit" className="border-y border-[var(--line)] bg-black/20 py-24">
       <div className="container-shell">
         <SectionHeading
           eyebrow="Procedural Proof"
