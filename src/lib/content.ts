@@ -166,7 +166,7 @@ export const serviceGroups = [
     services: [
       { icon: Gauge, title: "Lead scoring", detail: "Fit, urgency, source, budget, and behavior translated into priority." },
       { icon: Activity, title: "Analytics pipeline", detail: "Client-side events, server-side events, attribution, and conversion reporting." },
-      { icon: ShieldCheck, title: "System controls", detail: "Clear permissions, handoff rules, data hygiene, and alerts when an integration needs attention." },
+      { icon: ShieldCheck, title: "Leak monitoring", detail: "Know immediately when a lead stalls, a handoff fails, or revenue starts slipping through the system." },
     ],
   },
 ];
