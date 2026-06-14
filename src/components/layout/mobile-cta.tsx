@@ -1,10 +1,37 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 export function MobileCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 600);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="fixed inset-x-0 bottom-4 z-40 px-4 md:hidden">
+    <div
+      className={`
+        fixed inset-x-0 bottom-4 z-40 px-4 md:hidden
+        transition-all duration-500 ease-out
+        ${
+          visible
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-8 opacity-0"
+        }
+      `}
+    >
       <a
         href="#scorecard"
         className="
