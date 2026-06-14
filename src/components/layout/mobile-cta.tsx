@@ -8,7 +8,8 @@ export function MobileCTA() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 600);
+      const threshold = window.innerHeight * 0.8;
+      setVisible(window.scrollY > threshold);
     };
 
     handleScroll();
