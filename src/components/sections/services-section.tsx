@@ -27,7 +27,8 @@ export function ServicesSection() {
                 value={group.value}
                 className={cn(
                   "focus-visible-ring whitespace-nowrap rounded-full px-4 py-3 text-sm text-[var(--ink-muted)] transition md:px-5",
-                  "data-[state=active]:bg-[var(--ink)] data-[state=active]:text-[#08090b]"
+                  // Updated Glass Theme
+                  "data-[state=active]:bg-white/[0.12] data-[state=active]:text-[var(--ink)] data-[state=active]:backdrop-blur-xl data-[state=active]:border data-[state=active]:border-white/10"
                 )}
               >
                 {group.label}
