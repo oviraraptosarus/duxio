@@ -11,24 +11,36 @@ type Answers = Record<string, number>;
 function getResult(score: number) {
   if (score <= 3) {
     return {
-      title: "Critical revenue leakage",
+      severity: "Critical",
+      title: "Revenue leakage detected",
+      issue: "Lead response and follow-up",
+      impact: "High",
+      recommendation: "Lead Capture & Response Automation",
       detail:
-        "Your business is relying on memory, availability, and manual follow-up. The first fix should be a capture and response-speed system.",
+        "Your business is likely relying on manual follow-up, inconsistent response times, and disconnected communication. Leads are entering the business but some are not making it to booked conversations.",
     };
   }
 
   if (score <= 7) {
     return {
-      title: "Useful demand, weak handoffs",
+      severity: "Moderate",
+      title: "Demand exists but handoffs are weak",
+      issue: "Pipeline orchestration",
+      impact: "Medium",
+      recommendation: "Pipeline & Workflow Automation",
       detail:
-        "Some systems exist, but they are not connected enough to protect the revenue path. The first fix should be pipeline orchestration.",
+        "You already have demand entering the business, but the systems between lead capture, qualification, and booking are creating friction and unnecessary drop-off.",
     };
   }
 
   return {
-    title: "Strong base, compounding opportunity",
+    severity: "Low",
+    title: "Strong operating foundation",
+    issue: "Optimization opportunity",
+    impact: "Low",
+    recommendation: "Telemetry & Reactivation Systems",
     detail:
-      "The foundation is there. The next opportunity is deeper telemetry, reactivation loops, attribution, and operational optimization.",
+      "Core systems appear healthy. The highest leverage opportunity is deeper attribution, reactivation loops, reporting, and operational optimization.",
   };
 }
 
@@ -75,24 +87,64 @@ export function ScorecardClient() {
               </div>
 
               <div className="mono mt-2 text-[0.68rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
-                of 10
+                Leak Score
               </div>
             </div>
           </div>
 
           <div>
-            <h3 className="serif text-2xl md:text-4xl leading-tight tracking-[-0.04em] text-[var(--ink)]">
-              {result.title}
-            </h3>
+            <div className="space-y-5">
+              <div>
+                <div className="mono text-[0.68rem] uppercase tracking-[0.2em] text-[var(--signal)]">
+                  Leak Severity
+                </div>
 
-            <p className="mt-4 md:mt-5 text-base leading-8 text-[var(--ink-muted)]">
-              {result.detail}
-            </p>
+                <h3 className="serif mt-2 text-2xl md:text-4xl tracking-[-0.04em] text-[var(--ink)]">
+                  {result.severity}
+                </h3>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="rounded-2xl border border-[var(--line)] p-4">
+                  <div className="mono text-[0.62rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+                    Primary Failure Point
+                  </div>
+
+                  <div className="mt-2 font-medium text-[var(--ink)]">
+                    {result.issue}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-[var(--line)] p-4">
+                  <div className="mono text-[0.62rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+                    Revenue Risk
+                  </div>
+
+                  <div className="mt-2 font-medium text-[var(--ink)]">
+                    {result.impact}
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[rgba(244,209,155,0.18)] bg-[rgba(244,209,155,0.05)] p-4">
+                <div className="mono text-[0.62rem] uppercase tracking-[0.2em] text-[var(--ink-subtle)]">
+                  Recommended First System
+                </div>
+
+                <div className="mt-2 font-medium text-[var(--ink)]">
+                  {result.recommendation}
+                </div>
+              </div>
+
+              <p className="text-base leading-8 text-[var(--ink-muted)]">
+                {result.detail}
+              </p>
+            </div>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="w-full sm:w-auto">
                 <a href="#book">
-                  Fix this leak
+                  Book My Diagnosis
                   <ArrowRight size={16} />
                 </a>
               </Button>
@@ -134,9 +186,7 @@ export function ScorecardClient() {
           <div
             className="h-full rounded-full bg-[var(--signal)] transition-all duration-500"
             style={{
-              width: `${
-                ((step + 1) / scorecardQuestions.length) * 100
-              }%`,
+              width: `${((step + 1) / scorecardQuestions.length) * 100}%`,
             }}
           />
         </div>
@@ -178,9 +228,7 @@ export function ScorecardClient() {
           variant="ghost"
           className="w-full sm:w-auto"
           disabled={step === 0}
-          onClick={() =>
-            setStep((value) => Math.max(0, value - 1))
-          }
+          onClick={() => setStep((value) => Math.max(0, value - 1))}
         >
           Back
         </Button>
