@@ -130,7 +130,8 @@ export function ExampleAuditSection() {
             <p className="mb-6 text-sm font-medium text-[var(--ink-muted)]">
               See the complete audit methodology used by Duxio.
             </p>
-            <Button asChild size="lg" className="rounded-full bg-[var(--ink)] text-[var(--background)] hover:bg-[var(--ink-muted)]">
+            {/* The button classes are now updated to be glass-themed with visible white text */}
+            <Button asChild size="lg" className="rounded-full border border-white/10 bg-white/[0.08] backdrop-blur-xl text-[var(--ink)] hover:bg-white/[0.12]">
               <a 
                 href="https://drive.google.com/file/d/1InXc3bf74VdJKK7BS5fAtnFT88zR2LHL/view?usp=drivesdk" 
                 target="_blank" 
