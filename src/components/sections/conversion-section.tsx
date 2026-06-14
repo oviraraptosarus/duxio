@@ -36,7 +36,7 @@ export function ConversionSection() {
 
               <div className="mt-7 border-t border-[var(--line-strong)] pt-5">
                 <p className="text-sm font-medium text-[var(--ink-muted)]">
-                  No obligation. No hard pitch.
+                  No obligation. You'll leave with a clear next step whether we work together or not.
                 </p>
               </div>
             </div>
