@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { MobileCTA } from "@/components/layout/mobile-cta";
 import { SystemSection } from "@/components/sections/system-section";
 import { TrustSection } from "@/components/sections/trust-section";
+import { ExampleAuditSection } from "@/components/sections/example-audit";
 
 export default function Home() {
   return (
